@@ -360,6 +360,7 @@ var styleManager = {
     needsInject = false;
     var style = Object.keys(byName)
       .map(function(k) { return byName[k] })
+      .filter(function(v) { return v !== '' })
       .concat(remainder).join('\n');
     /* istanbul ignore next */
     if (cssTextProp) { cssTextProp.cssText = style; }
@@ -1884,7 +1885,7 @@ function tag$1(name, tmpl, css, attrs, fn) {
  * @returns { String } name/id of the tag just created
  */
 function tag2$1(name, tmpl, css, attrs, fn) {
-  if (css) { styleManager.add(css, name); }
+  styleManager.add(css, name);
 
   __TAG_IMPL[name] = { name: name, tmpl: tmpl, attrs: attrs, fn: fn };
 
